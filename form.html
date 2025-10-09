@@ -43,9 +43,11 @@
                 <label for="confirm-password">Confirm Password</label>
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter Your Password" required>
 
-                <label>
-                    <input type="checkbox" required> I agree to the terms and conditions
-                </label>
+                <div class="terms-container">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the</label>
+                    <a href="#" class="terms-link">terms and conditions</a>
+                </div>
 
                 <button type="submit">Register</button>
                 <p>Already have an account? <a href="login.html">Login</a></p>
