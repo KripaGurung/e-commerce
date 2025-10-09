@@ -1,52 +1,52 @@
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
 
-        .Main-Container {
-            display: flex;
-            max-width: 1200px;
-            width: 100%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            min-height: 700px;
-        }
+.Main-Container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    min-height: 700px;
+ }
 
-        .form-container {
-            flex: 1;
-            padding: 40px;
-            overflow-y: auto;
-            max-height: 700px;
-        }
+ .form-container {
+     flex: 1.2;
+     padding: 40px;
+     overflow-y: auto;
+     max-height: 700px;
+ }
 
-        .image-container {
-            flex: 1;
-            background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+ .image-container {
+     flex: 1;
+     background: #f8f9fa;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding: 20px;
+ }
 
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            max-height: 500px;
-            object-fit: contain;
-        }
+ .image-container img {
+     max-width: 100%;
+     height: auto;
+     max-height: 500px;
+     object-fit: contain;
+ }
 
         h2 {
             color: #333;
@@ -117,6 +117,27 @@
             font-size: 13px;
             color: #999;
         }
+
+        .hobbies-container {
+                                    margin-top: 15px;
+                                    margin-bottom: 5px;
+                                }
+                
+                                .hobbies-options {
+                                    display: grid;
+                                    grid-template-columns: repeat(2, 1fr);
+                                    gap: 10px;
+                                    margin-top: 5px;
+                                }
+                
+                                .hobby-option {
+                                    display: flex;
+                                    align-items: center;
+                                }
+                
+                                .hobby-option input {
+                                    margin-right: 8px;
+                                }
 
         .terms-container {
             display: flex;

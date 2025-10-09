@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login Form</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    
+    <div class="Main-Container">
+        <div class="form-container">
+            <h2>Login to Your Account</h2>
+            <form>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter Your Password" required>
+
+                <div class="remember-forgot">
+                    <label>
+                        <input type="checkbox" name="remember">
+                        Remember me
+                    </label>
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <button type="submit">Login</button>
+                <div class="register-link">
+                    <p>Don't have an account? <a href="form.html">Register</a></p>
+                </div>
+            </form>
+        </div>
+        <div class="image-container">
+            <img src="image/login.png" alt="login">
+        </div>
+    </div>
 </body>
+
 </html>
