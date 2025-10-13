@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style/style.css">
 </head>
 
 <body>
-    <div class="Main-Container">
-        <div class="form-container">
+    <div class="mainContainer">
+        <div class="formContainer">
             <h2>Registration Form</h2>
-            <form>
-                <label for="fullname">Full Name</label>
-                <input type="text" id="fullname" name="fullname" placeholder="Enter Your Name" required>
+            <form id="registerForm">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter Your Name" required>
 
-                <label for="dateofbirth">Date of birth</label>
-                <input type="date" id="dateofbirth" name="dateofbirth" placeholder="Enter your Date of Birth" required>
+                <label for="dateOfBirth">Date of birth</label>
+                <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="Enter your Date of Birth" required>
 
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
@@ -28,39 +28,39 @@
                 <label for="address">Address</label>
                 <input type="address" id="address" name="address" placeholder="Enter Your Address" rows="5">
 
-                <div class="hobbies-container">
+                <div class="hobbiesContainer">
                     <label>Hobbies</label>
-                    <div class="hobbies-options">
-                        <div class="hobby-option">
-                            <input type="checkbox" id="reading" name="hobbies" value="reading">
+                    <div class="hobbiesOptions">
+                        <div class="hobbyOption">
+                            <input type="checkBox" id="reading" name="hobbies" value="reading">
                             <label for="reading">Reading</label>
                         </div>
-                        <div class="hobby-option">
-                            <input type="checkbox" id="traveling" name="hobbies" value="traveling">
+                        <div class="hobbyOption">
+                            <input type="checkBox" id="traveling" name="hobbies" value="traveling">
                             <label for="traveling">Traveling</label>
                         </div>
-                        <div class="hobby-option">
-                            <input type="checkbox" id="sports" name="hobbies" value="sports">
+                        <div class="hobbyOption">
+                            <input type="checkBox" id="sports" name="hobbies" value="sports">
                             <label for="sports">Sports</label>
                         </div>
-                        <div class="hobby-option">
-                            <input type="checkbox" id="music" name="hobbies" value="music">
+                        <div class="hobbyOption">
+                            <input type="checkBox" id="music" name="hobbies" value="music">
                             <label for="music">Music</label>
                         </div>
-                        <div class="hobby-option">
-                            <input type="checkbox" id="cooking" name="hobbies" value="cooking">
+                        <div class="hobbyOption">
+                            <input type="checkBox" id="cooking" name="hobbies" value="cooking">
                             <label for="cooking">Cooking</label>
                         </div>
-                        <div class="hobby-option">
-                            <input type="checkbox" id="gaming" name="hobbies" value="gaming">
+                        <div class="hobbyOption">
+                            <input type="checkBox" id="gaming" name="hobbies" value="gaming">
                             <label for="gaming">Gaming</label>
                         </div>
-                        <div class="hobby-option">
-                            <input type="checkbox" id="photography" name="hobbies" value="photography">
+                        <div class="hobbyOption">
+                            <input type="checkBox" id="photography" name="hobbies" value="photography">
                             <label for="photography">Photography</label>
                         </div>
-                        <div class="hobby-option">
-                            <input type="checkbox" id="painting" name="hobbies" value="painting">
+                        <div class="hobbyOption">
+                            <input type="checkBox" id="painting" name="hobbies" value="painting">
                             <label for="painting">Painting</label>
                         </div>
                     </div>
@@ -78,23 +78,25 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter Your Password" required>
 
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter Your Password" required>
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="ConfirmPassword" name="confirmPassword" placeholder="Re-enter Your Password" required>
 
-                <div class="terms-container">
-                    <input type="checkbox" id="terms" required>
+                <div class="termsContainer">
+                    <input type="checkBox" id="terms">
                     <label for="terms">I agree to the</label>
                     <a href="#" class="terms-link">terms and conditions</a>
                 </div>
 
-                <button type="submit">Register</button>
+                <button type="submit">Register<a href="login.html"></a></button>
                 <p>Already have an account? <a href="login.html">Login</a></p>
             </form>
         </div>
-        <div class="image-container">
-            <img src="image/register.png" alt="register">
+        <div class="imageContainer">
+            <img src="../image/register.png" alt="register">
+
         </div>
     </div>
+    
+        <script src="../javaScript/form.js"></script>
 </body>
-
 </html>

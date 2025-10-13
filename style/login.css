@@ -14,7 +14,7 @@
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
 
-    .Main-Container {
+    .MainContainer {
         display: flex;
         max-width: 1000px;
         width: 100%;
@@ -25,7 +25,7 @@
         min-height: 600px;
     }
 
-    .form-container {
+    .formContainer {
         flex: 1;
         padding: 40px;
         display: flex;
@@ -33,7 +33,7 @@
         justify-content: center;
     }
 
-    .image-container {
+    .imageContainer {
         flex: 1;
         background: #f8f9fa;
         display: flex;
@@ -42,7 +42,7 @@
         padding: 20px;
     }
 
-    .image-container img {
+    .imageContainer img {
         max-width: 100%;
         height: auto;
         max-height: 400px;
@@ -95,7 +95,7 @@
         color: #999;
     }
 
-    .remember-forgot {
+    .rememberForgot {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -103,18 +103,18 @@
         margin: 10px 0;
     }
 
-    .remember-forgot label {
+    .rememberForgot label {
         display: flex;
         align-items: center;
         gap: 5px;
     }
 
-    .remember-forgot a {
+    .rememberForgot a {
         color: #667eea;
         text-decoration: none;
     }
 
-    .remember-forgot a:hover {
+    .rememberForgot a:hover {
         text-decoration: underline;
     }
 
@@ -134,21 +134,4 @@
     button:hover {
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-    }
-
-    .register-link {
-        text-align: center;
-        margin-top: 20px;
-        font-size: 14px;
-        color: #666;
-    }
-
-    .register-link a {
-        color: #667eea;
-        text-decoration: none;
-        font-weight: 500;
-    }
-
-    .register-link a:hover {
-        text-decoration: underline;
     }
