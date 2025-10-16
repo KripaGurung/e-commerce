@@ -2,27 +2,156 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    min-height: 100vh;
-    background: #F5F9FA;
+    background-color: #f4f6f9;
+    color: #333;
 }
 
 .mainContainer {
-    text-align: center;
-    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
 }
 
-h1 {
-    color: #112A46;
-    margin-bottom: 30px;
-    font-size: 28px;
-    font-weight: 600;
-    text-align: center;
+.topBar {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
 }
+
+#message {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.searchContainer {
+    display: flex;
+}
+
+.searchContainer input[type="text"] {
+    padding: 10px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    width: 300px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.searchContainer input[type="text"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.searchContainer button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 8px 8px 0;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.searchContainer button:hover {
+    background: linear-gradient(135deg, #2980b9, #1f6398);
+    transform: translateY(-1px);
+}
+
+.filterContainer select {
+    padding: 10px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+.filterContainer select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.content {
+    flex: 1;
+}
+
+.productContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 10px;
+}
+
+.productCard {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.productCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.productCard img {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 15px;
+}
+
+.productCard h3 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    flex: 1;
+    font-weight: 600;
+}
+
+.productCard .category {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.productCard .price {
+    color: #27ae60;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: auto;
+    text-align: right;
+}
+

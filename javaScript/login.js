@@ -8,13 +8,19 @@ document.addEventListener("DOMContentLoaded", function() {
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
+            const userName = email.split("@")[0];
+
+            // username lai store gareyko
+            localStorage.setItem("userLogIn", userName)
+
             const userData = {
                 email,
                 password
             };
             console.log("The user data is: ", userData); 
 
-            if (email === "kripa@yopmail.com" && password === "TEST@123") {
+            // checking email and password 
+            if (email === "kripa@yopmail.com"  && password === "TEST@123") {
                 // alert("logged successfully ")
                 window.location.href ="dashboard.html";
             } else{
