@@ -14,7 +14,7 @@ body {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-.mainContainer {
+.main-container {
     display: flex;
     max-width: 1200px;
     width: 100%;
@@ -25,14 +25,14 @@ body {
     min-height: 700px;
  }
 
- .formContainer {
+ .form-container {
      flex: 1.2;
      padding: 40px;
      overflow-y: auto;
      max-height: 700px;
  }
 
- .imageContainer {
+ .image-container {
      flex: 1;
      background: #f8f9fa;
      display: flex;
@@ -41,7 +41,7 @@ body {
      padding: 20px;
  }
 
- .imageContainer img {
+ .image-container img {
      max-width: 100%;
      height: auto;
      max-height: 500px;
@@ -112,28 +112,28 @@ input::placeholder {
     color: #999;
 }
 
-.hobbiesContainer {
+.hobbies-container {
     margin-top: 15px;
     margin-bottom: 5px;
 }
                 
-.hobbiesOptions {
+.hobbies-options {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin-top: 5px;
 }
                 
-.hobbyOption {
+.hobby-option {
     display: flex;
     align-items: center;
 }
                 
-.hobbyOption input {
+.hobby-option input {
     margin-right: 8px;
 }
 
-.termsContainer {
+.terms-container {
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -142,7 +142,7 @@ input::placeholder {
     gap: 8px;
 }
 
-.termsContainer input[type="checkbox"] {
+.terms-container input[type="checkbox"] {
     margin: 0;
     transform: scale(1.2);
 }

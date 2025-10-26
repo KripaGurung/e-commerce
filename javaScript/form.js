@@ -1,4 +1,4 @@
-const registerForm = document.getElementById("registerForm"); // HTML element with ID select gareyko jasley form element lai acsess dinxa
+const registerForm = document.getElementById("register-form"); // HTML element with ID select gareyko jasley form element lai acsess dinxa
 registerForm.addEventListener("submit", (e) => { // arrow function ree chy event ko object vayo
     e.preventDefault();
     // gets current value of each field by id

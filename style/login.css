@@ -14,7 +14,7 @@
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
 
-    .mainContainer {
+    .main-container {
         display: flex;
         max-width: 1000px;
         width: 100%;
@@ -25,7 +25,7 @@
         min-height: 600px;
     }
 
-    .formContainer {
+    .form-container {
         flex: 1;
         padding: 40px;
         display: flex;
@@ -33,7 +33,7 @@
         justify-content: center;
     }
 
-    .imageContainer {
+    .image-container {
         flex: 1;
         background: #f8f9fa;
         display: flex;
@@ -42,7 +42,7 @@
         padding: 20px;
     }
 
-    .imageContainer img {
+    .image-container img {
         max-width: 100%;
         height: auto;
         max-height: 400px;
@@ -95,7 +95,7 @@
         color: #999;
     }
 
-    .rememberForgot {
+    .remember-forgot {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -103,18 +103,18 @@
         margin: 10px 0;
     }
 
-    .rememberForgot label {
+    .remember-forgot label {
         display: flex;
         align-items: center;
         gap: 5px;
     }
 
-    .rememberForgot a {
+    .remember-forgot a {
         color: #667eea;
         text-decoration: none;
     }
 
-    .rememberForgot a:hover {
+    .remember-forgot a:hover {
         text-decoration: underline;
     }
 
