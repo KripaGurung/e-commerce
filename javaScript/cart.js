@@ -1,7 +1,6 @@
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartItemsDiv = document.getElementById('cart-items');
 const totalDiv = document.getElementById('total');
-const cartCount = document.getElementById('cart-count');
 
 function displayCart() {
     cartItemsDiv.innerHTML = '';
@@ -9,7 +8,6 @@ function displayCart() {
     if (cart.length === 0) {
         cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
         totalDiv.textContent = 'Total: $0';
-        cartCount.textContent = 0;
         return;
     }
     

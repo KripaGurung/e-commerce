@@ -1,117 +1,119 @@
 const userName = localStorage.getItem("userLogIn");
 
 if (userName) {
-    const message = document.getElementById("message");
-    message.textContent = `Welcome, ${userName}!`;
-}else{
-    window.location.href = "login.html";
+  // show welcome message
+  const message = document.getElementById("message");
+  message.textContent = "Welcome, " + userName + "!";
+} else {
+  // if not logged in, go to login page
+  window.location.href = "login.html";
 }
 
-// let product = fetch('https://fakestoreapi.com/products').then(response =>  response.json()
-// ).then(data => {console.log("data",data) } );
+// Get cart from local storage or make empty cart
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// console.log("product",product)
-
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-// updateCartCount();
-
-let products =[]; // to store the fetched data
+// Make empty array for products
+let products = [];
 let filteredProducts = [];
 
-// fetch products
-// const fetchProducts = async () => {
-//     const response = await fetch('https://fakestoreapi.com/products');
-//     const data = await response.json();
-//     products = data;
-// }; 
-// fetchProducts();
-
-// Fetch products
-const fetchProducts = async () => {
-    try {
-        const response = await fetch('https://fakestoreapi.com/products');
-        const data = await response.json();
-        products = data;
-        console.log('products', products)
-        filteredProducts = [...products]; // spread operator - {products ma vako data lai filteredProducts ma copy garxa}
-        showProducts(); // taneyko products display garney
-    } catch (error) {
-        console.log("Error fetching products: ", error);
-    }
-}; 
-
-function showProducts() {
-    const container = document.querySelector('.product-container');
-    container.innerHTML = ""; // innerHTML ley chy hamile j filter gareyko xa tyo matra dekhauxa
-    
-        filteredProducts.map(product => {
-        const div = document.createElement('div');
-        div.classList.add('product-card');
-        
-        const isInCart = cart.some(item => item.id === product.id); // Check garxa if product is already in cart
-        
-        div.innerHTML = `
-            <div class="product-clickable" data-id="${product.id}">
-                <img src="${product.image}" alt="${product.title}">
-                <h3>${product.title}</h3>
-                <p class="category">${product.category}</p> 
-                <p class="price">$${product.price}</p>
-            </div>
-            <button class="add-to-cart-btn ${isInCart ? 'added' : ''}" data-id="${product.id}">
-                <i class="fa ${isInCart}"></i>
-                ${isInCart ? 'Added to Cart' : 'Add to Cart'}
-            </button>
-        `;
-        container.appendChild(div); // yo chy product card lai main container ma rakhdinxa
+// Fetch products from API
+function fetchProducts() {
+  fetch("https://fakestoreapi.com/products")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      products = data;
+      filteredProducts = data;
+      showProducts();
+    })
+    .catch(function (error) {
+      console.log("Error fetching products:", error);
     });
-
-    // filteredProducts.forEach(product => {
-    //     const div = document.createElement('div');
-    //     div.classList.add('productCard');
-        
-    //     div.innerHTML = `<img src="${product.image}" alt="${product.title}">
-    //     <h3>${product.title}</h3>
-    //     <p class="category">${product.category}</p> 
-    //     <p class="price">$${product.price}</p>`;
-    //     container.appendChild(div);
-    // });
-
-    // Add event listeners to all Add to Cart buttons
-    document.querySelectorAll('.product-clickable').forEach(button => {
-        button.addEventListener('click', navigateToProductDetails);
-    });
-
 }
 
-// Navigate to product details page
-function navigateToProductDetails(e) {
-    // Don't navigate if the click was on the button
-    if (e.target.closest('.add-to-cart-btn')) {
-        return;
+// Show products on the page
+function showProducts() {
+  const container = document.querySelector(".product-container");
+  container.innerHTML = "";
+  
+  for (let i = 0; i < filteredProducts.length; i++) {
+    const product = filteredProducts[i];
+    
+    // check if product already in cart
+    let isInCart = false;
+    for (let j = 0; j < cart.length; j++) {
+        if (cart[j].id === product.id) {
+            isInCart = true;
+            break;
+        }
     }
     
-    const productId = e.currentTarget.getAttribute('data-id');
-    // Store the product ID in localStorage to retrieve on the product page
-    localStorage.setItem('selectedProductId', productId);
-    // Navigate to product details page
+    const div = document.createElement("div");
+    div.className = "product-card";
+    
+    div.innerHTML =
+    '<div class="product-clickable" data-id="' + product.id + '">' +
+    '<img src="' + product.image + '" alt="' + product.title + '">' +
+    "<h3>" + product.title + "</h3>" +
+    '<p class="category">' + product.category + "</p>" +
+    '<p class="price">$' + product.price + "</p>" +
+    "</div>" +
+    '<button class="add-to-cart-btn ' + (isInCart ? "added" : "") + '" data-id="' + product.id + '">' +
+    (isInCart ? "Added to Cart" : "Add to Cart") +
+    "</button>";
+    
+    container.appendChild(div);
+}
+
+// Add click for product details
+const productCards = document.querySelectorAll(".product-clickable");
+for (let i = 0; i < productCards.length; i++) {
+    productCards[i].addEventListener("click", navigateToProductDetails);
+}
+
+// Add click for Add to Cart
+const addCartBtns = document.querySelectorAll(".add-to-cart-btn");
+for (let i = 0; i < addCartBtns.length; i++) {
+    addCartBtns[i].addEventListener("click", addToCart);
+}
+}
+
+// Go to product detail page
+function navigateToProductDetails(e) {
+    const productId = e.currentTarget.getAttribute("data-id");
+    localStorage.setItem("selectedProductId", productId);
     window.location.href = "product.html";
 }
 
-// Add product to cart
+// Add or remove product from cart
 function addToCart(e) {
-    const productId = parseInt(e.currentTarget.getAttribute('data-id'));
-    const product = products.find(p => p.id === productId);
-            
-    // Check if product is already in cart
-    const existingItem = cart.find(item => item.id === productId);
-
+    const button = e.currentTarget;
+    const productId = parseInt(button.getAttribute("data-id"));
+    let product;
     
-    if (existingItem) {
-          // If already in cart, remove it
-        cart = cart.filter(item => item.id !== productId);
-        e.currentTarget.innerHTML = 'Add to Cart';
-        e.currentTarget.classList.remove('added');
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].id === productId) {
+            product = products[i];
+            break;
+        }
+    }
+    
+    let itemIndex = -1;
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i].id === productId) {
+            itemIndex = i;
+            break;
+        }
+    }
+    
+    if (itemIndex !== -1) {
+        // remove item if already added
+        cart.splice(itemIndex, 1);
+        button.textContent = "Add to Cart";
+        button.classList.remove("added");
     } else {
+       // add item to cart 
         cart.push({
             id: product.id,
             title: product.title,
@@ -120,50 +122,56 @@ function addToCart(e) {
             category: product.category,
             quantity: 1
         });
-        e.currentTarget.innerHTML = '<i class="fa fa-check"></i> Added to Cart';
-        e.currentTarget.classList.add('added');
+        button.textContent = "Added to Cart";
+        button.classList.add("added");
+        alert('Are you sure you want to add this to cart!');
     }
-
-    // Update cart in localStorage 
-    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
-
-    // Update cart count 
-    function updateCartCount() {
-        const cartCount = document.getElementById('cart-count');
-        cartCount.textContent = cart.length;
-        }
 }
 
-// Filter products by category
-document.getElementById('category-filter').addEventListener('change', function() {
+// Update cart count in navbar
+function updateCartCount() {
+    const cartCount = document.getElementById("cart-count");
+    cartCount.textContent = cart.length;
+}
+
+const categoryFilter = document.getElementById("category-filter");
+categoryFilter.addEventListener("change", function () {
     const category = this.value;
     
-    if (category === 'all') {
-        filteredProducts = [...products];
+    if (category === "all") {
+        filteredProducts = products;
     } else {
-        filteredProducts = products.filter(product => 
-            product.category === category
-        );
+        filteredProducts = [];
+        for (let i = 0; i < products.length; i++) {
+            if (products[i].category === category) {
+                filteredProducts.push(products[i]);
+            }
+        }
     }
-    
     showProducts();
 });
 
-// Search functionality
-document.getElementById('search-form').addEventListener('submit', function(e) {
+// Search products
+const searchForm = document.getElementById("search-form");
+searchForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
     
-    if (searchTerm) {
-        filteredProducts = products.filter(product => 
-            product.title.toLowerCase().includes(searchTerm) ||
-            product.description.toLowerCase().includes(searchTerm)
-        );
+    if (searchValue === "") {
+        filteredProducts = products;
     } else {
-        filteredProducts = [...products];
+        filteredProducts = [];
+        for (let i = 0; i < products.length; i++) {
+            const title = products[i].title.toLowerCase();
+            const description = products[i].description.toLowerCase();
+            if (title.includes(searchValue) || description.includes(searchValue)) {
+                filteredProducts.push(products[i]);
+            }
+        }
     }
-    
     showProducts();
 });
 

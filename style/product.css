@@ -26,7 +26,7 @@ body {
     align-items: center;
 } */
 
-.cart-icon {
+/* .cart-icon {
     margin: 20px;
     display: flex;
     justify-content: flex-end;
@@ -54,7 +54,7 @@ body {
     justify-content: center;
     font-size: 12px;
     font-weight: bold;
-}
+} */
 
 .content {
     flex: 1;

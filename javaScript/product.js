@@ -1,145 +1,177 @@
+// Get cart from localStorage or make it empty
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let products = [];
 
 // Fetch product details
-const fetchProductDetails = async () => {
-    const productId = localStorage.getItem('selectedProductId');
-    
-    if (!productId) {
-        // yedi productId payena vane dashboard ma redirect huney
-        window.location.href = "dashboard.html";
-        return;
+function fetchProductDetails() {
+  const productId = localStorage.getItem('selectedProductId');
+
+  if (!productId) {
+    // if product id not found, go back to dashboard
+    window.location.href = "dashboard.html";
+    return;
+  }
+
+  try {
+    const storedProducts = localStorage.getItem('allProducts');
+
+    if (storedProducts) {
+      // if products already saved in localStorage
+      products = JSON.parse(storedProducts);
+      displayProductDetails(productId);
+    } else {
+      // fetch products from API
+      fetch("https://fakestoreapi.com/products")
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          products = data;
+          localStorage.setItem('allProducts', JSON.stringify(products));
+          displayProductDetails(productId);
+        })
+        .catch(function (error) {
+          console.log("Error fetching products:", error);
+        });
     }
-    
-    try {
-        // Check if we already have products in localStorage
-        const storedProducts = localStorage.getItem('allProducts');
-        if (storedProducts) {
-            products = JSON.parse(storedProducts); // parse vaneko chy string lai JavaScript object ma convert garney
-            displayProductDetails(productId);
-        } else {
-            // Fetch all products if not stored
-            const response = await fetch('https://fakestoreapi.com/products');
-            products = await response.json();
-            localStorage.setItem('allProducts', JSON.stringify(products));
-            displayProductDetails(productId);
-        }
-    } catch (error) {
-        console.log("Error fetching product details: ", error);
-    }
-};
+  } catch (error) {
+    console.log("Error:", error);
+  }
+}
 
 // Display product details
 function displayProductDetails(productId) {
-    const product = products.find(p => p.id == productId);
-    const container = document.getElementById('product-details');
-    
-    if (!product) {
-        container.innerHTML = '<p>Product not found.</p>';
-        return;
+  const container = document.getElementById('product-details');
+
+  // find the product by id
+  let product = null;
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].id == productId) {
+      product = products[i];
+      break;
     }
-    
-    // some method- le array ma kunai euta item le condition fulfill garyo bhane true return garxa
+  }
 
-    const isInCart = cart.some(item => item.id == productId);
-    
-    container.innerHTML = `
-        <div class="product-detail-card">
-            <div class="product-image">
-                <img src="${product.image}" alt="${product.title}">
-            </div>
+  if (!product) {
+    container.innerHTML = "<p>Product not found.</p>";
+    return;
+  }
 
-            <div class="product-info">
-                <h1>${product.title}</h1>
-                <p class="category">${product.category.toUpperCase()}</p>
-                <div class="rating">
-                    <div class="rating-stars">
-                        ${generateStarRating(product.rating.rate)}
-                    </div>
-                    <span class="rating-count">(${product.rating.count} reviews)</span>
-                </div>
-                <p class="price">$${product.price}</p>
-                <p class="description">${product.description}</p>
-                <div class="button-container">
-                    <button class="back-btn" id="back-btn">
-                        <i class="fa fa-arrow-left"></i> Back to Products
-                    </button>
-                    <button class="add-to-cart-btn ${isInCart ? 'added' : ''}" data-id="${product.id}">
-                        <i class="fa ${isInCart ? 'fa-check' : 'fa-shopping-cart'}"></i>
-                        ${isInCart ? 'Added to Cart' : 'Add to Cart'}
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    // Add event listener to the Add to Cart button
+  // check if product already in cart
+  let isInCart = false;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id == product.id) {
+      isInCart = true;
+      break;
+    }
+  }
 
-    // querySelector - vaneko chy kunai pni pahilo vako element match vayo vane dinxa
-    // querySelectorAll - vaneko chy match vako sab element lai dinxa
-    document.querySelector('.add-to-cart-btn').addEventListener('click', addToCart);
-    
-    // Add event listener to the Back button
-    document.getElementById('back-btn').addEventListener('click', function() {
-        window.location.href = "dashboard.html";
-    });
+  // show product details
+  container.innerHTML =
+    '<div class="product-detail-card">' +
+    '<div class="product-image">' +
+    '<img src="' + product.image + '" alt="' + product.title + '">' +
+    '</div>' +
+    '<div class="product-info">' +
+    '<h1>' + product.title + '</h1>' +
+    '<p class="category">' + product.category.toUpperCase() + '</p>' +
+    '<div class="rating">' +
+    '<div class="rating-stars">' + generateStarRating(product.rating.rate) + '</div>' +
+    '<span class="rating-count">(' + product.rating.count + ' reviews)</span>' +
+    '</div>' +
+    '<p class="price">$' + product.price + '</p>' +
+    '<p class="description">' + product.description + '</p>' +
+    '<div class="button-container">' +
+    '<button class="back-btn" id="back-btn">Back to Products</button>' +
+    '<button class="add-to-cart-btn ' + (isInCart ? 'added' : '') + '" data-id="' + product.id + '">' +
+    (isInCart ? 'Added to Cart' : 'Add to Cart') +
+    '</button>' +
+    '</div>' +
+    '</div>' +
+    '</div>';
+
+  // Add to cart button click
+  const addBtn = document.querySelector('.add-to-cart-btn');
+  addBtn.addEventListener('click', addToCart);
+
+  // Back button click
+  const backBtn = document.getElementById('back-btn');
+  backBtn.addEventListener('click', function () {
+    window.location.href = "dashboard.html";
+  });
 }
 
-// star rating 
+// Make star rating (out of 5)
 function generateStarRating(rating) {
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    let starsHTML = '';
-    
-    for (let i = 0; i < 5; i++) {
-        if (i < fullStars) {
-            starsHTML += '<i class="fa fa-star"></i>';
-        } else if (i === fullStars && hasHalfStar) {
-            starsHTML += '<i class="fa fa-star-half-o"></i>';
-        } else {
-            starsHTML += '<i class="fa fa-star-o"></i>';
-        }
-    }
-    
-    return starsHTML;
-}
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
+  let starsHTML = "";
 
-// Add product to cart
-function addToCart(e) {
-    const productId = parseInt(e.currentTarget.getAttribute('data-id'));
-    const product = products.find(p => p.id === productId);
-            
-    // Check if product is already in cart
-    const existingItem = cart.find(item => item.id === productId);
-
-    if (existingItem) {
-        // If already in cart, remove it
-        cart = cart.filter(item => item.id !== productId);
-        e.currentTarget.innerHTML = '</i> Add to Cart';
-        e.currentTarget.classList.remove('added');
+  for (let i = 0; i < 5; i++) {
+    if (i < fullStars) {
+      starsHTML += '<i class="fa fa-star"></i>';
+    } else if (i === fullStars && hasHalfStar) {
+      starsHTML += '<i class="fa fa-star-half-o"></i>';
     } else {
-        cart.push({
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            image: product.image,
-            category: product.category,
-            quantity: 1
-        });
-        e.currentTarget.innerHTML = '</i> Added to Cart';
-        e.currentTarget.classList.add('added');
+      starsHTML += '<i class="fa fa-star-o"></i>';
     }
+  }
 
-    // Update cart in localStorage 
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
+  return starsHTML;
 }
 
-// Update cart count 
+// Add or remove product from cart
+function addToCart(e) {
+  const button = e.currentTarget;
+  const productId = parseInt(button.getAttribute('data-id'));
+
+  let product = null;
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].id === productId) {
+      product = products[i];
+      break;
+    }
+  }
+
+  let inCartIndex = -1;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id === productId) {
+      inCartIndex = i;
+      break;
+    }
+  }
+
+  if (inCartIndex !== -1) {
+    // product already in cart → remove it
+    cart.splice(inCartIndex, 1);
+    button.innerHTML = 'Add to Cart';
+    button.classList.remove('added');
+  } else {
+    // add new product to cart
+    const newItem = {
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      category: product.category,
+      quantity: 1
+    };
+    cart.push(newItem);
+    button.innerHTML = 'Added to Cart';
+    button.classList.add('added');
+  }
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartCount();
+}
+
+// Update cart count in navbar
 function updateCartCount() {
-    const cartCount = document.getElementById('cart-count');
+  const cartCount = document.getElementById('cart-count');
+  if (cartCount) {
     cartCount.textContent = cart.length;
+  }
 }
 
+// Call the function
 fetchProductDetails();
-updateCartCount();
