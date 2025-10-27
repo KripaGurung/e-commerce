@@ -41,7 +41,7 @@ function fetchProductDetails() {
 
 // Display product details
 function displayProductDetails(productId) {
-  const container = document.getElementById('product-details');
+  const container = document.getElementById('productCard');
 
   // find the product by id
   let product = null;
@@ -82,7 +82,6 @@ function displayProductDetails(productId) {
     '<p class="price">$' + product.price + '</p>' +
     '<p class="description">' + product.description + '</p>' +
     '<div class="button-container">' +
-    '<button class="back-btn" id="back-btn">Back to Products</button>' +
     '<button class="add-to-cart-btn ' + (isInCart ? 'added' : '') + '" data-id="' + product.id + '">' +
     (isInCart ? 'Added to Cart' : 'Add to Cart') +
     '</button>' +
@@ -95,7 +94,7 @@ function displayProductDetails(productId) {
   addBtn.addEventListener('click', addToCart);
 
   // Back button click
-  const backBtn = document.getElementById('back-btn');
+  const backBtn = document.getElementById('go-back');
   backBtn.addEventListener('click', function () {
     window.location.href = "dashboard.html";
   });
@@ -146,6 +145,7 @@ function addToCart(e) {
     cart.splice(inCartIndex, 1);
     button.innerHTML = 'Add to Cart';
     button.classList.remove('added');
+    
   } else {
     // add new product to cart
     const newItem = {
@@ -159,6 +159,7 @@ function addToCart(e) {
     cart.push(newItem);
     button.innerHTML = 'Added to Cart';
     button.classList.add('added');
+    alert('Are you sure you want to add this to cart ? ');
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
