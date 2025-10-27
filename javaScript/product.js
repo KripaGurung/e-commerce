@@ -1,3 +1,13 @@
+// Check user login
+const userName = localStorage.getItem("userLogIn");
+
+if (userName) {
+  const message = document.getElementById("message");
+  message.textContent = "Welcome, " + userName + "!";
+} else {
+  window.location.href = "login.html";
+}
+
 // Get cart from localStorage or make it empty
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let products = [];

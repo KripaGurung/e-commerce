@@ -1,3 +1,46 @@
+// Check user login
+const userName = localStorage.getItem("userLogIn");
+
+if (userName) {
+  const message = document.getElementById("message");
+  message.textContent = "Welcome, " + userName + "!";
+} else {
+  window.location.href = "login.html";
+}
+
+let products = [];
+
+// Update cart count in top-bar
+function updateCartCount() {
+  const cartCount = document.getElementById("cart-count");
+  cartCount.textContent = cart.length;
+}
+
+// Category filter
+const categoryFilter = document.getElementById("category-filter");
+categoryFilter.addEventListener("change", function () {
+  const category = this.value;
+  filteredProducts = category === "all" 
+    ? products 
+    : products.filter(p => p.category === category);
+  showProducts();
+});
+
+// Search products
+const searchForm = document.getElementById("search-form");
+searchForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const searchValue = document.getElementById("searchInput").value.toLowerCase().trim();
+
+  filteredProducts = searchValue === "" 
+    ? products 
+    : products.filter(p => 
+        p.title.toLowerCase().includes(searchValue) || 
+        p.description.toLowerCase().includes(searchValue)
+      );
+  showProducts();
+});
+
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartItemsDiv = document.getElementById('cart-items');
 const totalDiv = document.getElementById('total');

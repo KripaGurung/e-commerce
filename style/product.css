@@ -11,6 +11,68 @@ body {
     line-height: 1.6;
 }
 
+.main-container{
+    padding: 20px;
+}
+
+.top-bar {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+}
+
+#message {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+}
+
+.search-container input[type="text"] {
+    padding: 10px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    width: 300px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-container input[type="text"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.search-container button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 8px 8px 0;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.search-container button:hover {
+    background: linear-gradient(135deg, #2980b9, #1f6398);
+    transform: translateY(-1px);
+}
+
 .content {
     flex: 1;
     padding: 30px;
@@ -29,9 +91,8 @@ body {
     background: white;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-    padding: 40px;
+    padding: 25px;
     overflow: hidden;
-    margin-top: 45px;
 }
 
 .product-image {

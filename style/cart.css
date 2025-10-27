@@ -11,15 +11,94 @@ body {
 }
 
 .main-container {
+    display: flex;
+    flex-direction: column;
+    /* min-height: 100vh; */
     margin: 0 auto;
     padding: 30px;
-    max-width: 900px;
+    /* max-width: 900px; */
+}
+
+.top-bar {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+}
+
+#message {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+}
+
+.search-container input[type="text"] {
+    padding: 10px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    width: 300px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-container input[type="text"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.search-container button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 8px 8px 0;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.search-container button:hover {
+    background: linear-gradient(135deg, #2980b9, #1f6398);
+    transform: translateY(-1px);
+}
+
+.filter-container select {
+    padding: 10px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+.filter-container select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 .header {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 20px;
 }
 
 .back-arrow {
@@ -38,6 +117,9 @@ h1 {
     font-size: 32px;
 }
 
+.content{
+    max-width: 100vh;
+}
 .cart-items {
     display: flex;
     flex-direction: column;
