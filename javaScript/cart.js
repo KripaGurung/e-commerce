@@ -38,8 +38,8 @@ function removeItem(index) {
     displayCart();
 }
 
-document.getElementById('back-btn').addEventListener('click', () => {
-    window.location.href = 'product.html';
+document.getElementById('go-back').addEventListener('click', () => {
+    window.location.href = 'dashboard.html';
 });
 
 document.getElementById('checkout-btn').addEventListener('click', () => {
