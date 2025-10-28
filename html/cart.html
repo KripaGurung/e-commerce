@@ -34,13 +34,6 @@
                         <option value="women's clothing">Women's Clothing</option>
                     </select>
                 </div>
-
-                <div class="cart-container">
-                            <a id="go-back" class="back-arrow"></a><i class="fa fa-shopping-cart"></i>
-                            <span id="cart-count" class="cart-count"></span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         
@@ -52,10 +45,26 @@
         <div class="content">
                 
             <div id="cart-items" class="cart-items"></div>
+            
+            <div class="total-container">
+                <h3>Order Summary</h3>
                 
-            <div class="cart-buttons">
-                <h3 id="total" class="total">Total: $0</h3>
-                <button id="checkout-btn" class="add-to-cart-btn"><i class="fa fa-credit-card"></i> Checkout</button>
+                <div class="order-row">
+                    <span id="subtotal-text">Subtotal (0 items)</span>
+                    <span id="subtotal-amount">Rs. 0</span>
+                </div>
+                
+                <div class="order-row">
+                    <span>Shipping Fee</span>
+                    <span id="shipping-fee">Rs. 0</span>
+                </div>
+
+                <div class="order-row total">
+                    <span>Total</span>
+                    <span id="total-amount">Rs. 0</span>
+                </div>
+
+                <button id="checkout-btn" class="checkout-btn">PROCEED TO CHECKOUT</button>
             </div>
         </div>
     </div>
