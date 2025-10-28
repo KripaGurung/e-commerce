@@ -184,5 +184,57 @@ function updateCartCount() {
   }
 }
 
+const backButtons = document.querySelectorAll('#go-back');
+backButtons.forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    window.location.href = "dashboard.html";
+  });
+});
+
+const searchForm = document.getElementById('search-form');
+if (searchForm) {
+  searchForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const searchInput = document.getElementById('searchInput').value.trim().toLowerCase();
+    const container = document.getElementById('productCard');
+
+    if (searchInput === "") {
+      alert("Please enter a product name!");
+      return;
+    }
+
+    // Make sure products are loaded
+    if (!products || products.length === 0) {
+      const storedProducts = localStorage.getItem('allProducts');
+      if (storedProducts) {
+        products = JSON.parse(storedProducts);
+      } else {
+        alert("Products are still loading. Please try again in a second!");
+        return;
+      }
+    }
+
+    // Find product by title
+    const foundProduct = products.find(function (p) {
+      return p.title.toLowerCase().includes(searchInput);
+    });
+
+    if (foundProduct) {
+      // show found product
+      displayProductDetails(foundProduct.id);
+    } else {
+      container.innerHTML = "<p class='not-found'>Product not found.</p>";
+    }
+  });
+}
+
+const cartIcon = document.querySelector('.fa-shopping-cart');
+if (cartIcon) {
+  cartIcon.addEventListener('click', function () {
+    window.location.href = "cart.html";
+  });
+}
+
 // Call the function
 fetchProductDetails();
+updateCartCount();

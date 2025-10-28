@@ -73,6 +73,14 @@ body {
     transform: translateY(-1px);
 }
 
+.not-found {
+    font-size: 20px;
+    text-align: center;
+    color: #555;
+    margin-top: 30px;
+    font-weight: 500;
+}
+
 .content {
     flex: 1;
     padding: 30px;
