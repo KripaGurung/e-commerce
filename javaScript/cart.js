@@ -8,6 +8,35 @@ if (userName) {
   window.location.href = "login.html";
 }
 
+function updateOrderSummary() {
+  const totalContainer = document.querySelector('.total-container');
+  const subtotalText = document.getElementById('subtotal-text');
+  const subtotalAmount = document.getElementById('subtotal-amount');
+  const shippingFeeText = document.getElementById('shipping-fee');
+  const totalAmountText = document.getElementById('total-amount');
+  const checkoutBtn = document.getElementById('checkout-btn');
+
+  let total = 0;
+  let totalItems = 0;
+
+  // calculate totals
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+    totalItems += item.quantity;
+  });
+
+  const shippingFee = total > 0 ? 100 : 0;
+  const grandTotal = total + shippingFee;
+
+  // update texts
+  subtotalText.textContent = `Subtotal (${totalItems} items)`;
+  subtotalAmount.textContent = `Rs. ${total.toFixed(2)}`;
+  shippingFeeText.textContent = `Rs. ${shippingFee}`;
+  totalAmountText.textContent = `Rs. ${grandTotal.toFixed(2)}`;
+  checkoutBtn.textContent = `PROCEED TO CHECKOUT (${totalItems})`;
+}
+
+
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartItemsDiv = document.getElementById('cart-items');
 const totalDiv = document.getElementById('total');
@@ -91,6 +120,13 @@ function applyFilters() {
   });
 
   displayCart(filteredCart);
+
+   const totalContainer = document.querySelector('.total-container');
+  if (searchValue || selectedCategory !== 'all') {
+    totalContainer.style.display = 'none'; 
+  } else {
+    totalContainer.style.display = 'block'; 
+  }
 }
 
 displayCart();

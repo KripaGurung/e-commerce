@@ -184,8 +184,15 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-top: 25px;
     padding: 20px;
-    width: 320px;
-    height: 250px;
+    width: 310px;
+    height: 180px;
+}
+
+.row-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: anchor-center;
 }
 
 .total-container h3 {
@@ -196,18 +203,10 @@ h1 {
     padding-bottom: 8px;
 }
 
-.order-row {
-    display: flex;
-    justify-content: space-between;
-    margin: 8px 0;
-    font-size: 15px;
-    color: #333;
-}
-
 .checkout-btn {
     background-color:#1b7e46;
     color: white;
-    width: 100%;
+    width: 80%;
     padding: 12px 0;
     border: none;
     border-radius: 5px;
