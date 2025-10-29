@@ -43,6 +43,21 @@ registerForm.addEventListener("submit", (e) => { // arrow function ree chy event
     };
     console.log("The user data : ", userData); // console ma data print garney
 
-    alert("Account created successfully!")
-    window.location.href ="login.html"
+    // get existing users or create new array
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // check if email already exists
+    const userExists = users.some(user => user.email === email);
+    if (userExists) {
+        alert("User with this email already exists!");
+        return;
+    }
+    
+    // save new user
+    users.push(userData);
+    localStorage.setItem("users", JSON.stringify(users));
+    
+    alert("Account created successfully!");
+    window.location.href = "login.html";
+
 });

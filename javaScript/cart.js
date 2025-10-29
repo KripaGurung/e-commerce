@@ -37,7 +37,9 @@ function updateOrderSummary() {
 }
 
 
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const loggedInEmail = localStorage.getItem("loggedInUserEmail");
+let cart = JSON.parse(localStorage.getItem(`cart_${loggedInEmail}`)) || [];
+
 const cartItemsDiv = document.getElementById('cart-items');
 const totalDiv = document.getElementById('total');
 
@@ -77,7 +79,8 @@ function displayCart(items = filteredCart) {
 
 function removeItem(index) {
   cart.splice(index, 1);
-  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem(`cart_${loggedInEmail}`, JSON.stringify(cart));
+
   applyFilters(); // refresh after removing
 }
 

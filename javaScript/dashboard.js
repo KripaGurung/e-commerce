@@ -9,7 +9,9 @@ if (userName) {
 }
 
 // Get cart or initialize empty
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const loggedInEmail = localStorage.getItem("loggedInUserEmail");
+let cart = JSON.parse(localStorage.getItem(`cart_${loggedInEmail}`)) || [];
+
 
 // Products array
 let products = [];
@@ -87,7 +89,7 @@ function addToCart(e) {
     alert('Are you sure you want to add this to cart ? ');
   }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem(`cart_${loggedInEmail}`, JSON.stringify(cart));
   updateCartCount();
 }
 
@@ -95,6 +97,7 @@ function addToCart(e) {
 function updateCartCount() {
   const cartCount = document.getElementById("cart-count");
   cartCount.textContent = cart.length;
+
 }
 
 // Category filter
@@ -153,6 +156,17 @@ backArrow.addEventListener("click", () => {
   backArrow.style.display = "none";
 });
 
+const logoutBtn = document.getElementById("logoutBtn");
 
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", function() {
+    // remove only login-related info
+    localStorage.removeItem("userLogIn");
+    localStorage.removeItem("loggedInUserEmail");
+
+    alert("You have been logged out!");
+    window.location.href = "login.html";
+  });
+}
 
 fetchProducts();
