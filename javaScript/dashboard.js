@@ -107,20 +107,52 @@ categoryFilter.addEventListener("change", function () {
   showProducts();
 });
 
-// Search products
+// search form
 const searchForm = document.getElementById("search-form");
+const searchInput = document.getElementById("searchInput");
+const backArrow = document.getElementById("go-back");
+
+// hide arrow initially
+backArrow.style.display = "none";
+
 searchForm.addEventListener("submit", function (e) {
   e.preventDefault();
-  const searchValue = document.getElementById("searchInput").value.toLowerCase().trim();
 
-  filteredProducts = searchValue === "" 
-    ? products 
-    : products.filter(p => 
-        p.title.toLowerCase().includes(searchValue) || 
-        p.description.toLowerCase().includes(searchValue)
-      );
-  showProducts();
+  const searchValue = searchInput.value.toLowerCase().trim();
+
+  if (searchValue === "") {
+    filteredProducts = products;
+    showProducts();
+    backArrow.style.display = "none";
+    return;
+  }
+
+  filteredProducts = products.filter(p =>
+    p.title.toLowerCase().includes(searchValue) ||
+    (p.description?.toLowerCase().includes(searchValue))
+  );
+
+  const container = document.querySelector(".product-container");
+  container.innerHTML = "";
+
+  if (filteredProducts.length === 0) {
+    container.innerHTML = "<p class='not-found'>Product not found.</p>";
+  } else {
+    showProducts();
+  }
+
+  // arrow dekhauney jaba searched
+  backArrow.style.display = "inline-block";
 });
+
+// when arrow clicked than redirect to dashboard
+backArrow.addEventListener("click", () => {
+  searchInput.value = "";
+  filteredProducts = products;
+  showProducts();
+  backArrow.style.display = "none";
+});
+
 
 
 fetchProducts();

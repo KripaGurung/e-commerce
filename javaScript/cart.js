@@ -10,9 +10,9 @@ if (userName) {
 
 function updateOrderSummary() {
   const totalContainer = document.querySelector('.total-container');
-  const subtotalText = document.getElementById('subtotal-text');
-  const subtotalAmount = document.getElementById('subtotal-amount');
-  const shippingFeeText = document.getElementById('shipping-fee');
+  // const subtotalText = document.getElementById('subtotal-text');
+  // const subtotalAmount = document.getElementById('subtotal-amount');
+  // const shippingFeeText = document.getElementById('shipping-fee');
   const totalAmountText = document.getElementById('total-amount');
   const checkoutBtn = document.getElementById('checkout-btn');
 
@@ -29,9 +29,9 @@ function updateOrderSummary() {
   const grandTotal = total + shippingFee;
 
   // update texts
-  subtotalText.textContent = `Subtotal (${totalItems} items)`;
-  subtotalAmount.textContent = `Rs. ${total.toFixed(2)}`;
-  shippingFeeText.textContent = `Rs. ${shippingFee}`;
+  // subtotalText.textContent = `Subtotal (${totalItems} items)`;
+  // subtotalAmount.textContent = `Rs. ${total.toFixed(2)}`;
+  // shippingFeeText.textContent = `Rs. ${shippingFee}`;
   totalAmountText.textContent = `Rs. ${grandTotal.toFixed(2)}`;
   checkoutBtn.textContent = `PROCEED TO CHECKOUT (${totalItems})`;
 }
@@ -72,7 +72,7 @@ function displayCart(items = filteredCart) {
     cartItemsDiv.appendChild(div);
   });
 
-  totalDiv.textContent = `Total: $${total.toFixed(2)}`;
+  totalDiv.textContent = `: $${total.toFixed(2)}`;
 }
 
 function removeItem(index) {

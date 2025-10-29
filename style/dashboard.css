@@ -92,8 +92,27 @@ body {
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
+.not-found {
+    font-size: 20px;
+    text-align: center;
+    color: #555;
+    margin-top: 30px;
+    font-weight: 500;
+}
+
 .content {
     flex: 1;
+}
+
+.back-arrow {
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.back-arrow:hover {
+    color: #007bff;
 }
 
 .product-container {
