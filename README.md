@@ -26,6 +26,8 @@ It displays a list of products, lets users search and filter items and provides 
 
 ## Technologies Used
 
+- HTML
+
 - JavaScript
 
 - CSS
