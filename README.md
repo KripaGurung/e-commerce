@@ -1,6 +1,6 @@
 # E-commerce
 
-This a simple e-commerce web app built in React. This project fetches product data from the FakeStore API and allows users to browse products, view details and add items to their shopping cart. It is created as a beginner-friendly practice project.
+This a simple e-commerce web app built in JavaScript. This project fetches product data from the FakeStore API and allows users to browse products, view details and add items to their shopping cart. It is created as a beginner-friendly practice project.
 
 ## Project Overview
 
